@@ -1,9 +1,12 @@
-# Twitter Follower Bot
+# Twitter Follower Bot ☠️
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
+![Maintained](https://img.shields.io/badge/Maintained-yes-green.svg)
+![Made by Seraph-666](https://img.shields.io/badge/Made%20by-Seraph--666-blueviolet.svg)
 
-# Twitter Follower Automation Bot
+🚀 Automate following Twitter accounts directly from a list.
 
-🚀 **Automate following Twitter accounts from a list, effortlessly.**
 
 
 
