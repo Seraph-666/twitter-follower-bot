@@ -49,9 +49,9 @@ https://x.com/anotheruser
   - BATCH_LIMIT
 
 3. Run the script:
-\```bash
+```bash
 python follo.py
-\```
+```
 ## Requirements
 
 Python 3.8+
