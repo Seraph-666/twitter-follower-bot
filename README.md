@@ -6,6 +6,8 @@
 ![Made by Seraph-666](https://img.shields.io/badge/Made%20by-Seraph--666-blueviolet.svg)
 
 🚀 Automate following Twitter accounts directly from a list.
+    
+    > Twitter Follower Bot built using Selenium and undetected-chromedriver.
 
 
 
