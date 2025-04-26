@@ -6,10 +6,9 @@ import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
 from colorama import Fore, Style, init
 
-init(autoreset=True)  # Auto reset color after print
+init(autoreset=True)
 
 # === BANNER ===
 banner = """ 
@@ -22,10 +21,9 @@ banner = """
 ░░   ░▒ ░    ░      ░ ▒ ▒░░ ░ ▒  ░ ░ ▒  ░ ░ ▒ ▒░  ▒ ░ ░  ░ ░  ░ ░▒ ░ ▒░
  ░    ░      ░ ░  ░ ░ ░ ▒   ░ ░    ░ ░  ░ ░ ░ ▒   ░   ░    ░    ░░   ░ 
  ░    ░               ░ ░     ░  ░   ░  ░   ░ ░     ░      ░  ░  ░     
-                        
-                        https://t.me/Bytebl33d3r                                           
+                      
+                      https://t.me/bytebl33d3r
 """
-
 print(Fore.GREEN + banner + Style.RESET_ALL)
 
 # === CONFIG ===
@@ -34,7 +32,7 @@ CHROME_PROFILE_PATH = "C:/Users/admin1/AppData/Local/Google/Chrome/User Data"
 PROFILE_NAME = "Default"
 LOG_FILE = "follow_log.txt"
 BATCH_LIMIT = 50  # Stop after this many successful follows
-SHORT_WAIT = 1.5  # Short timeout in seconds
+SHORT_WAIT = 1.5
 
 # === SETUP CHROME ===
 options = uc.ChromeOptions()
@@ -87,25 +85,28 @@ followed_lines_to_remove = []
 
 start_time = time.time()
 
-for username, original_line in usernames:
-    if follow_user(username):
-        successful_follows += 1
-        followed_lines_to_remove.append(original_line)
-        with open(LOG_FILE, "a", encoding="utf-8") as log:
-            log.write(f"{username} ✅ Followed\n")
-    else:
-        with open(LOG_FILE, "a", encoding="utf-8") as log:
-            log.write(f"{username} ⏩ Skipped\n")
+try:
+    for username, original_line in usernames:
+        if follow_user(username):
+            successful_follows += 1
+            followed_lines_to_remove.append(original_line)
+            with open(LOG_FILE, "a", encoding="utf-8") as log:
+                log.write(f"{username} ✅ Followed\n")
+        else:
+            with open(LOG_FILE, "a", encoding="utf-8") as log:
+                log.write(f"{username} ⏩ Skipped\n")
 
-    if successful_follows > 0 and successful_follows % BATCH_LIMIT == 0:
-        print(f"🛑 Hit {BATCH_LIMIT} successful follows. Stopping.")
-        break
+        if successful_follows > 0 and successful_follows % BATCH_LIMIT == 0:
+            print(f"🛑 Hit {BATCH_LIMIT} successful follows. Stopping.")
+            break
 
-    # way faster random pause
-    time.sleep(random.uniform(1.0, 2.5))
+        time.sleep(random.uniform(1.0, 2.5))
 
-remove_followed_from_file(followed_lines_to_remove)
+except KeyboardInterrupt:
+    print("\n🛑 CTRL+C detected! Cleaning up and exiting...")
 
-end_time = time.time()
-print(f"✅ Done. Total time: {round(end_time - start_time, 2)} seconds.")
-driver.quit()
+finally:
+    remove_followed_from_file(followed_lines_to_remove)
+    driver.quit()
+    end_time = time.time()
+    print(f"✅ Done. Total time: {round(end_time - start_time, 2)} seconds.")
